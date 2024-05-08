@@ -1,0 +1,14 @@
+sort,size,exectime,type,coresize
+bubble,1000,33,paralel,1
+bubble,1000,2,paralel,3
+bubble,1000,3,paralel,5
+bubble,1000,3,paralel,8
+bubble,1000,4,paralel,20
+bubble,1000000,2054290,paralel,1
+bubble,1000000,426618,paralel,3
+bubble,1000000,348401,paralel,5
+bubble,1000000,327440,paralel,8
+bubble,1000,7,paralel,20
+quick,10,0,serial,1
+quick,10,27,paralel,2
+quick,10,25,paralel,2
