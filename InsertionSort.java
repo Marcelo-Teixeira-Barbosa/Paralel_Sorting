@@ -4,67 +4,58 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class QuickSort {
-    public void serialSort(int[] array){
-        int low = 0;
-        int high = array.length - 1;
+public class InsertionSort {
 
+    public void serialSort(int[] array){
+        int begin = 0;
+        int end = array.length-1;
+        
         long tempoInicial = System.currentTimeMillis();
 
-        quickSort(array, low, high);
+        int[] sortedArray = array.clone();
+
+        insertionSort(sortedArray);
 
         long tempoFinal = System.currentTimeMillis();
 		long tempoExecucao = tempoFinal - tempoInicial;
 
         String csvFile = "sorting.csv";
-        try (FileWriter writer = new FileWriter(csvFile, true)) { // Append mode
+        try (FileWriter writer = new FileWriter(csvFile, true)) { 
             File file = new File(csvFile);
             if (file.length() == 0) {
                 writer.append("sort,size,exectime,type,coresize\n"); // Headers
             }
-            writer.append( "quick" + "," + array.length + "," + tempoExecucao + "," + "serial" + "," + 1 +  "\n");
+            writer.append( "merge" + "," + sortedArray.length + "," + tempoExecucao + "," + "serial" + "," + 1 +  "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //System.out.println(Arrays.toString(array));
+        System.out.println(Arrays.toString(sortedArray));
         
     }
 
+    public static void insertionSort(int[] array) {
+        int n = array.length;
+        for (int i = 1; i < n; i++) {
+            int key = array[i];
+            int j = i - 1;
+            while (j >= 0 && array[j] > key) {
+                array[j + 1] = array[j];
+                j = j - 1;
+            }
+            array[j + 1] = key;
+        }
+    }
+
     private static class SortThreads extends Thread{
-        SortThreads(int[] array, int begin, int end){
+        SortThreads(int[] array){
             super(()->{
-                QuickSort.quickSort(array, begin, end);
+                InsertionSort.insertionSort(array);;
             });
             this.start();
         }
     }
-    
-    public static void quickSort(int[] array, int low, int high) {
-        if (low < high) {
-            int pivotIndex = partition(array, low, high);
-            quickSort(array, low, pivotIndex - 1);
-            quickSort(array, pivotIndex + 1, high);
-        }
-    }
 
-    public static int partition(int[] array, int low, int high) {
-        int pivot = array[high];
-        int i = low - 1;
-        for (int j = low; j < high; j++) {
-            if (array[j] <= pivot) {
-                i++;
-                int temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
-            }
-        }
-        int temp = array[i + 1];
-        array[i + 1] = array[high];
-        array[high] = temp;
-        return i + 1;
-    }
-
-    public void paralelSort(int[] array, int numCores){
+        public void paralelSort(int[] array, int numCores){
         long tempoInicial = System.currentTimeMillis();
         final int length = array.length;
         int[] sortedArray = array.clone();
@@ -79,10 +70,10 @@ public class QuickSort {
         final ArrayList<SortThreads> threads = new ArrayList<>();
     
         for(int i=0; i < length; i+=maxlim){
-            int low = i;
+            int beg = i;
             int remain = (length)-i;
-            int high = remain < maxlim? i+(remain-1): i+(maxlim-1);  
-            final SortThreads t = new SortThreads(sortedArray, low, high);
+            int end = remain < maxlim? i+(remain-1): i+(maxlim-1);  
+            final SortThreads t = new SortThreads(sortedArray);
             threads.add(t);
         }
         for(Thread t: threads){
@@ -91,14 +82,13 @@ public class QuickSort {
                 t.join();
             } catch(InterruptedException ignored){}
         }
-
+      
         for(int i=0; i < length; i+=maxlim){
             int mid = i == 0? 0 : i-1;
             int remain = (length)-i;
             int end = remain < maxlim? i+(remain-1): i+(maxlim-1); 
             merge(sortedArray, 0, mid, end);
         }
-
         long tempoFinal = System.currentTimeMillis();
 		long tempoExecucao = tempoFinal - tempoInicial;
 
@@ -108,11 +98,11 @@ public class QuickSort {
             if (file.length() == 0) {
                 writer.append("sort,size,exectime,type,coresize\n"); // Headers
             }
-            writer.append( "quick" + "," + sortedArray.length + "," + tempoExecucao + "," + "paralel" + "," + numThreads +  "\n");
+            writer.append( "merge" + "," + sortedArray.length + "," + tempoExecucao + "," + "paralel" + "," + numThreads +  "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //System.out.println(Arrays.toString(sortedArray));
+        System.out.println(Arrays.toString(sortedArray));
     }
 
     public static void merge(int[] array, int begin, int mid, int end){
@@ -146,6 +136,5 @@ public class QuickSort {
             array[i] = temp[k];
         }
     }
-
     
 }

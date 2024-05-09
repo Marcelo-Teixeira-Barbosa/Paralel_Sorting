@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
 
 public class BubbleSort {
     
-    static void serialBubble(int[] size){
+    void serialBubble(int[] size){
         long tempoInicial = System.currentTimeMillis();
         int[] sortedArray = size.clone();
         int length = sortedArray.length;
