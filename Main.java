@@ -24,7 +24,7 @@ public class Main {
 
         Random random = new Random();
 
-        int[] randomArray1000_1 = new int[1000];
+        int[] randomArray1000_1 = new int[100000];
         int[] randomArray1000_2 = new int[1000];
         for (int i = 0; i < randomArray1000_1.length; i++) {
             randomArray1000_1[i] = random.nextInt(1000) + 1; // Generates a random number between 1 and 1000
@@ -33,30 +33,33 @@ public class Main {
             randomArray1000_2[i] = random.nextInt(1000) + 1; // Generates a random number between 1 and 1000
         }
         
+        int[] selectArray = randomArray1000_1;
         MergeSort mergeSort = new MergeSort();
-       
         QuickSort quickSort = new QuickSort();
         BubbleSort bubbleSort = new BubbleSort();
         InsertionSort insertionSort = new InsertionSort();
-    /*
-        bubbleSort.serialBubble(randomArray1000_1);
-        bubbleSort.paralelBubble(randomArray1000_1, 5);
-        bubbleSort.paralelBubble(randomArray1000_1, 5);
-        bubbleSort.paralelBubble(randomArray1000_1, 10);
-        bubbleSort.paralelBubble(randomArray1000_1, 0);
- */
-        quickSort.serialSort(randomArray1000_1);
-        quickSort.paralelSort(randomArray1000_1, 5);
-        quickSort.paralelSort(randomArray1000_1, 5);
-        quickSort.paralelSort(randomArray1000_1, 10);
-        quickSort.paralelSort(randomArray1000_1, 0);
-/*
-        insertionSort.serialSort(randomArray1000_1);
-        insertionSort.paralelSort(randomArray1000_1, 5);
-        insertionSort.paralelSort(randomArray1000_1, 5);
-        insertionSort.paralelSort(randomArray1000_1, 10);
-        insertionSort.paralelSort(randomArray1000_1, 0);
-    */  
+
+        mergeSort.serialSort(selectArray);
+        mergeSort.paralelSort(selectArray, 5);
+        mergeSort.paralelSort(selectArray, 5);
+        mergeSort.paralelSort(selectArray, 10);
+        mergeSort.paralelSort(selectArray, 0);
+    
+        bubbleSort.serialBubble(selectArray);
+        bubbleSort.paralelBubble(selectArray, 5);
+        bubbleSort.paralelBubble(selectArray, 10);
+        bubbleSort.paralelBubble(selectArray, 0);
+ 
+        quickSort.serialSort(selectArray);
+        quickSort.paralelSort(selectArray, 5);
+        quickSort.paralelSort(selectArray, 10);
+        quickSort.paralelSort(selectArray, 0);
+
+        insertionSort.serialSort(selectArray);
+        insertionSort.paralelSort(selectArray, 5);
+        insertionSort.paralelSort(selectArray, 10);
+        insertionSort.paralelSort(selectArray, 0);
+      
         // You can call serialPrimo with different sizes as needed.
     }
 

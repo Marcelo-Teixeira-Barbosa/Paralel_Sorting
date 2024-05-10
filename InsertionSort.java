@@ -25,7 +25,7 @@ public class InsertionSort {
             if (file.length() == 0) {
                 writer.append("sort,size,exectime,type,coresize\n"); // Headers
             }
-            writer.append( "merge" + "," + sortedArray.length + "," + tempoExecucao + "," + "serial" + "," + 1 +  "\n");
+            writer.append( "insertion" + "," + sortedArray.length + "," + tempoExecucao + "," + "serial" + "," + 1 +  "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -98,7 +98,7 @@ public class InsertionSort {
             if (file.length() == 0) {
                 writer.append("sort,size,exectime,type,coresize\n"); // Headers
             }
-            writer.append( "merge" + "," + sortedArray.length + "," + tempoExecucao + "," + "paralel" + "," + numThreads +  "\n");
+            writer.append( "insertion" + "," + sortedArray.length + "," + tempoExecucao + "," + "paralel" + "," + numThreads +  "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
