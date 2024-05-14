@@ -45,10 +45,10 @@ public class Main {
         mergeSort.paralelSort(selectArray, 10);
         mergeSort.paralelSort(selectArray, 0);
     
-        bubbleSort.serialBubble(selectArray);
-        bubbleSort.paralelBubble(selectArray, 5);
-        bubbleSort.paralelBubble(selectArray, 10);
-        bubbleSort.paralelBubble(selectArray, 0);
+        bubbleSort.serialSort(selectArray);
+        bubbleSort.paralelSort(selectArray, 5);
+        bubbleSort.paralelSort(selectArray, 10);
+        bubbleSort.paralelSort(selectArray, 0);
  
         quickSort.serialSort(selectArray);
         quickSort.paralelSort(selectArray, 5);
