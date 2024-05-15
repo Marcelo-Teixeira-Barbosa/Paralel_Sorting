@@ -25,13 +25,13 @@ public class Main {
 
         Random random = new Random();
 
-        int[] randomArray1000_1 = new int[10000];
+        int[] randomArray1000_1 = new int[100000];
         for (int i = 0; i < randomArray1000_1.length; i++) {
             randomArray1000_1[i] = random.nextInt(1000) + 1; // Generates a random number between 1 and 1000
         }
         int[] selectArray = randomArray1000_1;
        
-        /*
+    /* 
         saveMerge(selectArray, 1);
         saveMerge(selectArray, 5);
         saveMerge(selectArray, 0);
@@ -43,17 +43,19 @@ public class Main {
         saveInsertion(selectArray, 1);
         saveInsertion(selectArray, 5);
         saveInsertion(selectArray, 0);
-*/
+
         saveQuick(selectArray, 1);
         saveQuick(selectArray, 5);
         saveQuick(selectArray, 0);
-     
+     */
         callChart();
       
 }
     public static void saveMerge(int[] selectArray, int numThread){
         MergeSort mergeSort = new MergeSort();
 
+        if(numThread == 0){numThread = Runtime.getRuntime().availableProcessors();}
+
         if(numThread == 1){
             recordData("merge", selectArray.length , mergeSort.serialSort(selectArray), "serial", numThread);
             recordData("merge", selectArray.length , mergeSort.serialSort(selectArray), "serial", numThread);
@@ -61,18 +63,18 @@ public class Main {
             recordData("merge", selectArray.length , mergeSort.serialSort(selectArray), "serial", numThread);
             recordData("merge", selectArray.length , mergeSort.serialSort(selectArray), "serial", numThread);
         }else{
-            recordData("merge", selectArray.length , mergeSort.paralelSort(selectArray,5), "paralel", numThread);
-            recordData("merge", selectArray.length , mergeSort.paralelSort(selectArray,5), "paralel", numThread);
-            recordData("merge", selectArray.length , mergeSort.paralelSort(selectArray,5), "paralel", numThread);
-            recordData("merge", selectArray.length , mergeSort.paralelSort(selectArray,5), "paralel", numThread);
-            recordData("merge", selectArray.length , mergeSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("merge", selectArray.length , mergeSort.paralelSort(selectArray,numThread), "paralel", numThread);
+            recordData("merge", selectArray.length , mergeSort.paralelSort(selectArray,numThread), "paralel", numThread);
+            recordData("merge", selectArray.length , mergeSort.paralelSort(selectArray,numThread), "paralel", numThread);
+            recordData("merge", selectArray.length , mergeSort.paralelSort(selectArray,numThread), "paralel", numThread);
+            recordData("merge", selectArray.length , mergeSort.paralelSort(selectArray,numThread), "paralel", numThread);
         } 
         
     }
 
     public static void saveBublle(int[] selectArray, int numThread){
         BubbleSort bubbleSort = new BubbleSort();
-
+        if(numThread == 0){numThread = Runtime.getRuntime().availableProcessors();}
         if(numThread == 1){
             recordData("bubble", selectArray.length , bubbleSort.serialSort(selectArray), "serial", numThread);
             recordData("bubble", selectArray.length , bubbleSort.serialSort(selectArray), "serial", numThread);
@@ -80,17 +82,18 @@ public class Main {
             recordData("bubble", selectArray.length , bubbleSort.serialSort(selectArray), "serial", numThread);
             recordData("bubble", selectArray.length , bubbleSort.serialSort(selectArray), "serial", numThread);
         }else{
-            recordData("bubble", selectArray.length , bubbleSort.paralelSort(selectArray,5), "paralel", numThread);
-            recordData("bubble", selectArray.length , bubbleSort.paralelSort(selectArray,5), "paralel", numThread);
-            recordData("bubble", selectArray.length , bubbleSort.paralelSort(selectArray,5), "paralel", numThread);
-            recordData("bubble", selectArray.length , bubbleSort.paralelSort(selectArray,5), "paralel", numThread);
-            recordData("bubble", selectArray.length , bubbleSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("bubble", selectArray.length , bubbleSort.paralelSort(selectArray,numThread), "paralel", numThread);
+            recordData("bubble", selectArray.length , bubbleSort.paralelSort(selectArray,numThread), "paralel", numThread);
+            recordData("bubble", selectArray.length , bubbleSort.paralelSort(selectArray,numThread), "paralel", numThread);
+            recordData("bubble", selectArray.length , bubbleSort.paralelSort(selectArray,numThread), "paralel", numThread);
+            recordData("bubble", selectArray.length , bubbleSort.paralelSort(selectArray,numThread), "paralel", numThread);
         } 
         
     }
 
     public static void saveQuick(int[] selectArray, int numThread){
         QuickSort quickSort = new QuickSort();
+        if(numThread == 0){numThread = Runtime.getRuntime().availableProcessors();}
 
         if(numThread == 1){
             recordData("quick", selectArray.length , quickSort.serialSort(selectArray), "serial", numThread);
@@ -99,17 +102,18 @@ public class Main {
             recordData("quick", selectArray.length , quickSort.serialSort(selectArray), "serial", numThread);
             recordData("quick", selectArray.length , quickSort.serialSort(selectArray), "serial", numThread);
         }else{
-            recordData("quick", selectArray.length , quickSort.paralelSort(selectArray,5), "paralel", numThread);
-            recordData("quick", selectArray.length , quickSort.paralelSort(selectArray,5), "paralel", numThread);
-            recordData("quick", selectArray.length , quickSort.paralelSort(selectArray,5), "paralel", numThread);
-            recordData("quick", selectArray.length , quickSort.paralelSort(selectArray,5), "paralel", numThread);
-            recordData("quick", selectArray.length , quickSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("quick", selectArray.length , quickSort.paralelSort(selectArray,numThread), "paralel", numThread);
+            recordData("quick", selectArray.length , quickSort.paralelSort(selectArray,numThread), "paralel", numThread);
+            recordData("quick", selectArray.length , quickSort.paralelSort(selectArray,numThread), "paralel", numThread);
+            recordData("quick", selectArray.length , quickSort.paralelSort(selectArray,numThread), "paralel", numThread);
+            recordData("quick", selectArray.length , quickSort.paralelSort(selectArray,numThread), "paralel", numThread);
         } 
         
     }
 
     public static void saveInsertion(int[] selectArray, int numThread){
         InsertionSort insertionSort = new InsertionSort();
+        if(numThread == 0){numThread = Runtime.getRuntime().availableProcessors();}
 
         if(numThread == 1){
             recordData("insertion", selectArray.length , insertionSort.serialSort(selectArray), "serial", numThread);
@@ -118,11 +122,11 @@ public class Main {
             recordData("insertion", selectArray.length , insertionSort.serialSort(selectArray), "serial", numThread);
             recordData("insertion", selectArray.length , insertionSort.serialSort(selectArray), "serial", numThread);
         }else{
-            recordData("insertion", selectArray.length , insertionSort.paralelSort(selectArray,5), "paralel", numThread);
-            recordData("insertion", selectArray.length , insertionSort.paralelSort(selectArray,5), "paralel", numThread);
-            recordData("insertion", selectArray.length , insertionSort.paralelSort(selectArray,5), "paralel", numThread);
-            recordData("insertion", selectArray.length , insertionSort.paralelSort(selectArray,5), "paralel", numThread);
-            recordData("insertion", selectArray.length , insertionSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("insertion", selectArray.length , insertionSort.paralelSort(selectArray,numThread), "paralel", numThread);
+            recordData("insertion", selectArray.length , insertionSort.paralelSort(selectArray,numThread), "paralel", numThread);
+            recordData("insertion", selectArray.length , insertionSort.paralelSort(selectArray,numThread), "paralel", numThread);
+            recordData("insertion", selectArray.length , insertionSort.paralelSort(selectArray,numThread), "paralel", numThread);
+            recordData("insertion", selectArray.length , insertionSort.paralelSort(selectArray,numThread), "paralel", numThread);
         } 
         
     }
