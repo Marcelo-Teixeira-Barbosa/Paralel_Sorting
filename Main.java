@@ -10,6 +10,7 @@ import java.util.Random;
 // merge sort, bubble sort, one extra sort
 public class Main {
     public static void main(String[] args) {
+        
         int[] arr5_1= {7, 2, 9, 4, 1, 6, 10, 3, 8, 5};
         int[] arr5_2= {3, 8, 5, 1, 9, 4, 10, 7, 6, 2};
         int[] arr5_3= {6, 2, 10, 8, 4, 9, 1, 3, 5, 7};
@@ -24,157 +25,145 @@ public class Main {
 
         Random random = new Random();
 
-        int[] randomArray1000_1 = new int[100000];
-        int[] randomArray1000_2 = new int[1000];
+        int[] randomArray1000_1 = new int[10000];
         for (int i = 0; i < randomArray1000_1.length; i++) {
             randomArray1000_1[i] = random.nextInt(1000) + 1; // Generates a random number between 1 and 1000
         }
-        for (int i = 0; i < randomArray1000_2.length; i++) {
-            randomArray1000_2[i] = random.nextInt(1000) + 1; // Generates a random number between 1 and 1000
-        }
-        
         int[] selectArray = randomArray1000_1;
+       
+        /*
+        saveMerge(selectArray, 1);
+        saveMerge(selectArray, 5);
+        saveMerge(selectArray, 0);
+
+        saveBublle(selectArray, 1);
+        saveBublle(selectArray, 5);
+        saveBublle(selectArray, 0);
+
+        saveInsertion(selectArray, 1);
+        saveInsertion(selectArray, 5);
+        saveInsertion(selectArray, 0);
+*/
+        saveQuick(selectArray, 1);
+        saveQuick(selectArray, 5);
+        saveQuick(selectArray, 0);
+     
+        callChart();
+      
+}
+    public static void saveMerge(int[] selectArray, int numThread){
         MergeSort mergeSort = new MergeSort();
-        QuickSort quickSort = new QuickSort();
+
+        if(numThread == 1){
+            recordData("merge", selectArray.length , mergeSort.serialSort(selectArray), "serial", numThread);
+            recordData("merge", selectArray.length , mergeSort.serialSort(selectArray), "serial", numThread);
+            recordData("merge", selectArray.length , mergeSort.serialSort(selectArray), "serial", numThread);
+            recordData("merge", selectArray.length , mergeSort.serialSort(selectArray), "serial", numThread);
+            recordData("merge", selectArray.length , mergeSort.serialSort(selectArray), "serial", numThread);
+        }else{
+            recordData("merge", selectArray.length , mergeSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("merge", selectArray.length , mergeSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("merge", selectArray.length , mergeSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("merge", selectArray.length , mergeSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("merge", selectArray.length , mergeSort.paralelSort(selectArray,5), "paralel", numThread);
+        } 
+        
+    }
+
+    public static void saveBublle(int[] selectArray, int numThread){
         BubbleSort bubbleSort = new BubbleSort();
+
+        if(numThread == 1){
+            recordData("bubble", selectArray.length , bubbleSort.serialSort(selectArray), "serial", numThread);
+            recordData("bubble", selectArray.length , bubbleSort.serialSort(selectArray), "serial", numThread);
+            recordData("bubble", selectArray.length , bubbleSort.serialSort(selectArray), "serial", numThread);
+            recordData("bubble", selectArray.length , bubbleSort.serialSort(selectArray), "serial", numThread);
+            recordData("bubble", selectArray.length , bubbleSort.serialSort(selectArray), "serial", numThread);
+        }else{
+            recordData("bubble", selectArray.length , bubbleSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("bubble", selectArray.length , bubbleSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("bubble", selectArray.length , bubbleSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("bubble", selectArray.length , bubbleSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("bubble", selectArray.length , bubbleSort.paralelSort(selectArray,5), "paralel", numThread);
+        } 
+        
+    }
+
+    public static void saveQuick(int[] selectArray, int numThread){
+        QuickSort quickSort = new QuickSort();
+
+        if(numThread == 1){
+            recordData("quick", selectArray.length , quickSort.serialSort(selectArray), "serial", numThread);
+            recordData("quick", selectArray.length , quickSort.serialSort(selectArray), "serial", numThread);
+            recordData("quick", selectArray.length , quickSort.serialSort(selectArray), "serial", numThread);
+            recordData("quick", selectArray.length , quickSort.serialSort(selectArray), "serial", numThread);
+            recordData("quick", selectArray.length , quickSort.serialSort(selectArray), "serial", numThread);
+        }else{
+            recordData("quick", selectArray.length , quickSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("quick", selectArray.length , quickSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("quick", selectArray.length , quickSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("quick", selectArray.length , quickSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("quick", selectArray.length , quickSort.paralelSort(selectArray,5), "paralel", numThread);
+        } 
+        
+    }
+
+    public static void saveInsertion(int[] selectArray, int numThread){
         InsertionSort insertionSort = new InsertionSort();
 
-        mergeSort.serialSort(selectArray);
-        mergeSort.paralelSort(selectArray, 5);
-        mergeSort.paralelSort(selectArray, 5);
-        mergeSort.paralelSort(selectArray, 10);
-        mergeSort.paralelSort(selectArray, 0);
-    
-        bubbleSort.serialSort(selectArray);
-        bubbleSort.paralelSort(selectArray, 5);
-        bubbleSort.paralelSort(selectArray, 10);
-        bubbleSort.paralelSort(selectArray, 0);
- 
-        quickSort.serialSort(selectArray);
-        quickSort.paralelSort(selectArray, 5);
-        quickSort.paralelSort(selectArray, 10);
-        quickSort.paralelSort(selectArray, 0);
-
-        insertionSort.serialSort(selectArray);
-        insertionSort.paralelSort(selectArray, 5);
-        insertionSort.paralelSort(selectArray, 10);
-        insertionSort.paralelSort(selectArray, 0);
-      
-        // You can call serialPrimo with different sizes as needed.
+        if(numThread == 1){
+            recordData("insertion", selectArray.length , insertionSort.serialSort(selectArray), "serial", numThread);
+            recordData("insertion", selectArray.length , insertionSort.serialSort(selectArray), "serial", numThread);
+            recordData("insertion", selectArray.length , insertionSort.serialSort(selectArray), "serial", numThread);
+            recordData("insertion", selectArray.length , insertionSort.serialSort(selectArray), "serial", numThread);
+            recordData("insertion", selectArray.length , insertionSort.serialSort(selectArray), "serial", numThread);
+        }else{
+            recordData("insertion", selectArray.length , insertionSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("insertion", selectArray.length , insertionSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("insertion", selectArray.length , insertionSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("insertion", selectArray.length , insertionSort.paralelSort(selectArray,5), "paralel", numThread);
+            recordData("insertion", selectArray.length , insertionSort.paralelSort(selectArray,5), "paralel", numThread);
+        } 
+        
     }
 
-    public static void serialPrimo(int size) {
-        long tempoInicial = System.currentTimeMillis();
-
-        int inicio = 2;
-        int fim = size;
-
-        boolean[] primos = new boolean[fim + 1];
-        Arrays.fill(primos, true);
-
-        for (int i = 2; i * i <= fim; i++) {
-            if (primos[i]) {
-                for (int j = i * i; j <= fim; j += i) {
-                    primos[j] = false;
-                }
+    public static void callChart(){
+        try {
+            String command = "python chart.py";
+            Process process = Runtime.getRuntime().exec(command);
+            process.waitFor();
+            
+            // Print any output from the command
+            // You can customize this part as per your requirements
+            java.util.Scanner scanner = new java.util.Scanner(process.getInputStream());
+            while (scanner.hasNextLine()) {
+                System.out.println(scanner.nextLine());
             }
-        }
-
-        int count = 0;
-        for (int i = inicio; i <= fim; i++) {
-            if (primos[i]) {
-                count++;
+            scanner.close();
+            java.util.Scanner errorScanner = new java.util.Scanner(process.getErrorStream());
+            while (errorScanner.hasNextLine()) {
+                System.out.println(errorScanner.nextLine());
             }
+            errorScanner.close();
+            
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
         }
+    }
 
-        long tempoFinal = System.currentTimeMillis();
-        long tempoExecucao = tempoFinal - tempoInicial;
-
-        // Writing to CSV
-        String csvFile = "prime_numbers.csv";
+    public static void recordData(String sort, int size, long tempoExecucao, String type, int numThreads){
+        String csvFile = "sorting.csv";
         try (FileWriter writer = new FileWriter(csvFile, true)) { // Append mode
             File file = new File(csvFile);
             if (file.length() == 0) {
-                writer.append("size,exectime,type,coresize\n"); // Headers
+                writer.append("sort,size,exectime,type,coresize,title\n"); // Headers
             }
-            writer.append(size + "," + tempoExecucao + "," + "serial" + "," + 1 +  "\n");
+            writer.append( sort + "," + size + "," + tempoExecucao + "," + type + "," + numThreads + "," + type + "_" + numThreads + "_cores" + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Total prime numbers between " + inicio + " and " + fim + ": " + count);
-        System.out.println("Tempo de execução: " + tempoExecucao + " milisegundos");
     }
-
-	public static void paraleloPrimo(int size, int numCores){
-		long tempoInicial = System.currentTimeMillis();
-
-		int inicio = 1;
-		int fim = size;
-
-		int numThreads = numCores;
-
-        if(numCores == 0){numThreads = Runtime.getRuntime().availableProcessors();}
-
-		int chunkSize = (fim - inicio +1) / numThreads;
-		List<Integer> result = new ArrayList<>();
-		
-		ExecutorService executor =  Executors.newFixedThreadPool(numThreads);
-		for(int i = 0; i < numThreads; i++){
-			int threadStart = inicio + i * chunkSize;
-			int threadEnd = threadStart + chunkSize - 1;
-
-			executor.execute(() -> achaPrimos(threadStart, threadEnd, result));
-		}
-
-		executor.shutdown();
-		while(!executor.isTerminated()){
-
-		}
-		System.out.println("Prime numbers between " + inicio + " and " + fim + ":");
-		System.out.println(result);
-
-		long tempoFinal = System.currentTimeMillis();
-		long tempoExecucao = tempoFinal - tempoInicial;
-
-        // Writing to CSV
-        String csvFile = "prime_numbers.csv";
-        try (FileWriter writer = new FileWriter(csvFile, true)) { // Append mode
-            File file = new File(csvFile);
-            if (file.length() == 0) {
-                writer.append("size,exectime,type,coresize\n"); // Headers
-            }
-            writer.append(size + "," + tempoExecucao + "," + "paralel" + "," + numThreads + "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-		System.out.println("\nExecution time: " + tempoExecucao + " miliseconds");
-
-	}
-
-	private static void achaPrimos(int start, int end, List<Integer> result) {
-		for(int num = start; num <= end; num++){
-			if(ehPrimo(num)){
-				result.add(num);
-			}
-		}
-	}
-
-	private static boolean ehPrimo(int num){
-		if(num < 2){
-			return false;
-		}
-		for(int i = 2; i <= Math.sqrt(num); i++){
-			if(num % i == 0){
-				return false;
-			}
-		}
-		return true;
-	}
-
-
-    
+  
 }
 
 

@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class InsertionSort {
 
-    public void serialSort(int[] array){
+    public long serialSort(int[] array){
         int begin = 0;
         int end = array.length-1;
         
@@ -19,17 +19,7 @@ public class InsertionSort {
         long tempoFinal = System.currentTimeMillis();
 		long tempoExecucao = tempoFinal - tempoInicial;
 
-        String csvFile = "sorting.csv";
-        try (FileWriter writer = new FileWriter(csvFile, true)) { 
-            File file = new File(csvFile);
-            if (file.length() == 0) {
-                writer.append("sort,size,exectime,type,coresize\n"); // Headers
-            }
-            writer.append( "insertion" + "," + sortedArray.length + "," + tempoExecucao + "," + "serial" + "," + 1 +  "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println(Arrays.toString(sortedArray));
+        return tempoExecucao;
         
     }
 
@@ -55,7 +45,7 @@ public class InsertionSort {
         }
     }
 
-        public void paralelSort(int[] array, int numCores){
+        public long paralelSort(int[] array, int numCores){
         long tempoInicial = System.currentTimeMillis();
         final int length = array.length;
         int[] sortedArray = array.clone();
@@ -92,17 +82,9 @@ public class InsertionSort {
         long tempoFinal = System.currentTimeMillis();
 		long tempoExecucao = tempoFinal - tempoInicial;
 
-        String csvFile = "sorting.csv";
-        try (FileWriter writer = new FileWriter(csvFile, true)) { // Append mode
-            File file = new File(csvFile);
-            if (file.length() == 0) {
-                writer.append("sort,size,exectime,type,coresize\n"); // Headers
-            }
-            writer.append( "insertion" + "," + sortedArray.length + "," + tempoExecucao + "," + "paralel" + "," + numThreads +  "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        
         System.out.println(Arrays.toString(sortedArray));
+        return tempoExecucao;
     }
 
     public static void merge(int[] array, int begin, int mid, int end){

@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
 
 public class BubbleSort {
     
-    void serialSort(int[] size){
+    long serialSort(int[] size){
         long tempoInicial = System.currentTimeMillis();
         int[] sortedArray = size.clone();
         int length = sortedArray.length;
@@ -27,21 +27,12 @@ public class BubbleSort {
         long tempoFinal = System.currentTimeMillis();
 		long tempoExecucao = tempoFinal - tempoInicial;
 
-        String csvFile = "sorting.csv";
-        try (FileWriter writer = new FileWriter(csvFile, true)) { // Append mode
-            File file = new File(csvFile);
-            if (file.length() == 0) {
-                writer.append("sort,size,exectime,type,coresize\n"); // Headers
-            }
-            writer.append( "bubble" + "," + size.length + "," + tempoExecucao + "," + "serial" + "," + 1 +  "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return tempoExecucao;
 
         //System.out.println("SORTED SERIAL BUBBLE: " + Arrays.toString(sortedArray));
     }
 
-    public void paralelSort(int[] size, int numCores){
+    public long paralelSort(int[] size, int numCores){
         long tempoInicial = System.currentTimeMillis();
         int[] sortedArray = size.clone();
         int length = sortedArray.length;
@@ -73,16 +64,7 @@ public class BubbleSort {
         long tempoFinal = System.currentTimeMillis();
 		long tempoExecucao = tempoFinal - tempoInicial;
 
-        String csvFile = "sorting.csv";
-        try (FileWriter writer = new FileWriter(csvFile, true)) { // Append mode
-            File file = new File(csvFile);
-            if (file.length() == 0) {
-                writer.append("sort,size,exectime,type,coresize\n"); // Headers
-            }
-            writer.append( "bubble" + "," + size.length + "," + tempoExecucao + "," + "paralel" + "," + numThreads +  "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return tempoExecucao;
     }
 
     public static void BubbleSortTask(int[] arr, int start, int end) {

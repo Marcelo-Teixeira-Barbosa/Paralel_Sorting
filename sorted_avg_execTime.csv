@@ -1,0 +1,10 @@
+title,type,size,sort,exectime
+paralel_10_cores,paralel,1000,merge,1.4
+paralel_10_cores,paralel,10000,merge,1.0
+paralel_10_cores,paralel,100000,merge,4.0
+paralel_5_cores,paralel,1000,merge,6.0
+paralel_5_cores,paralel,10000,merge,6.4
+paralel_5_cores,paralel,100000,merge,10.0
+serial_0_cores,serial,1000,merge,0.2
+serial_0_cores,serial,10000,merge,1.4
+serial_0_cores,serial,100000,merge,10.6

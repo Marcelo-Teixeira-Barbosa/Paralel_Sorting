@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class QuickSort {
-    public void serialSort(int[] array){
+    public long serialSort(int[] array){
         int low = 0;
         int high = array.length - 1;
 
@@ -16,16 +16,7 @@ public class QuickSort {
         long tempoFinal = System.currentTimeMillis();
 		long tempoExecucao = tempoFinal - tempoInicial;
 
-        String csvFile = "sorting.csv";
-        try (FileWriter writer = new FileWriter(csvFile, true)) { // Append mode
-            File file = new File(csvFile);
-            if (file.length() == 0) {
-                writer.append("sort,size,exectime,type,coresize\n"); // Headers
-            }
-            writer.append( "quick" + "," + array.length + "," + tempoExecucao + "," + "serial" + "," + 1 +  "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       return tempoExecucao;
         //System.out.println(Arrays.toString(array));
         
     }
@@ -40,10 +31,17 @@ public class QuickSort {
     }
     
     public static void quickSort(int[] array, int low, int high) {
-        if (low < high) {
+        while (low < high) {
             int pivotIndex = partition(array, low, high);
-            quickSort(array, low, pivotIndex - 1);
-            quickSort(array, pivotIndex + 1, high);
+            if(pivotIndex - low < high - pivotIndex){
+                quickSort(array, low, pivotIndex - 1);
+                low = pivotIndex + 1;
+            }else{
+                quickSort(array, pivotIndex + 1, high);
+                high = pivotIndex - 1;
+            }
+            
+            
         }
     }
 
@@ -64,7 +62,7 @@ public class QuickSort {
         return i + 1;
     }
 
-    public void paralelSort(int[] array, int numCores){
+    public long paralelSort(int[] array, int numCores){
         long tempoInicial = System.currentTimeMillis();
         final int length = array.length;
         int[] sortedArray = array.clone();
@@ -102,16 +100,7 @@ public class QuickSort {
         long tempoFinal = System.currentTimeMillis();
 		long tempoExecucao = tempoFinal - tempoInicial;
 
-        String csvFile = "sorting.csv";
-        try (FileWriter writer = new FileWriter(csvFile, true)) { // Append mode
-            File file = new File(csvFile);
-            if (file.length() == 0) {
-                writer.append("sort,size,exectime,type,coresize\n"); // Headers
-            }
-            writer.append( "quick" + "," + sortedArray.length + "," + tempoExecucao + "," + "paralel" + "," + numThreads +  "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return tempoExecucao;
         //System.out.println(Arrays.toString(sortedArray));
     }
 
